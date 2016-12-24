@@ -1,0 +1,95 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Image Converter API",
+        "description": "Simple app to convert pdf/png/jpg",
+        "version": "1.0.0"
+    },
+    "host": "unknown.com",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/v1",
+    "paths": {
+        "/image/info": {
+            "post": {
+                "summary": "Image info",
+                "description": "Get simple information about the image\n",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "The file to get information for",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "image info",
+                        "schema": {
+                            "$ref": "#/definitions/Image"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/convert": {
+            "post": {
+                "summary": "Convert image to different format",
+                "description": "Convert image to different format\n",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "The file to convert",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "to_type",
+                        "in": "formData",
+                        "description": "The type to convert to",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "pdf",
+                            "png",
+                            "jpg"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "image",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid choice specified"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Image": {
+            "type": "object",
+            "properties": {
+                "depth": {
+                    "type": "string",
+                    "description": "Depth of image"
+                },
+                "resolution": {
+                    "type": "string",
+                    "description": "Resolution tuple of image"
+                },
+                "size": {
+                    "type": "string",
+                    "description": "width and height of image"
+                }
+            }
+        }
+    }
+}
