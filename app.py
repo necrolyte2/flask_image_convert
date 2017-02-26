@@ -73,7 +73,7 @@ def convert_pdf(filepath):
     Turn pdf into multi page image
     http://stackoverflow.com/questions/23706661/imagemagick-wand-save-pdf-pages-as-images
     '''
-    pdf = Image(file=filepath)
+    pdf = Image(file=filepath, resolution=288)
 
     pages = len(pdf.sequence)
 
